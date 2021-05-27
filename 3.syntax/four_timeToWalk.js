@@ -2,46 +2,42 @@
 // calculate how long will take the student to get to uni
 function timeToWalk(steps, lengthOfStep, speedInKmPerHr){
     let distance = steps * lengthOfStep; // in meters
+
     //convert kms/hr into mtr/min : 5kms/hr = 5*1000 / 60
     let   speedInMtrPerSec = (speedInKmPerHr * 1000) / (60 * 60);
     let time = distance/speedInMtrPerSec;
-
-   if(distance > 500){
-       for(let i=0; i<distance; i+=500){
-           time += 60;
-       }
-   }
-   let result = ``;
-   let hrs = time % (60*60);
-   return time;
-   let hrsStr = '';
-   if(!hrs){ 
-       hrsStr = '00';
-    }else if(hrs <=9){
-        hrsStr = `0${hrs}`
-    }else{
-        hrsStr = hrs;
+    for(let i=500; i<=distance; i+=500){
+        time += 60;
+        // console.log(time)
     }
-   time -= hrs * (60*60);
-   let min = time % 60;
-   let minStr = '';
-   if(!min){
-       minStr = '00'
-    }else if(min <= 9){
-       minStr = `0${min}`;
-    }else{
-        minStr = min;
-    }
-   time -= min;
-   let secStr = '';
-   if(!time){
-       secStr = '00';
-   }else if(time <= 9){
-       secStr = `0${time}`;
-   }else {
-       secStr = time;
-   }
+    let hrs = Math.floor(time / 3600);
+    let min = Math.floor((time % 3600) / 60);
+    let sec = Math.ceil(time % 60);
 
-   return `${hrsStr}`;
+    let result = '';
+    if(hrs < 10){
+        result += '0' + hrs; 
+    }else result += '' + hrs;
+    min < 10 ? result += ':0' + min : result += ':' + min;
+    sec < 10 ? result += ':0' + sec : result += ':' + sec;
+    console.log(result); 
 }
-console.log(timeToWalk(4000, 0.60, 5)); // 00:32:48
+timeToWalk(4000, 0.60, 5); // 00:32:48
+
+// function format(time) {   
+//     // Hours, minutes and seconds
+//     var hrs = ~~(time / 3600);
+//     var mins = ~~((time % 3600) / 60);
+//     var secs = ~~time % 60;
+
+//     // Output like "1:01" or "4:03:59" or "123:03:59"
+//     var ret = "";
+//     if (hrs > 0) {
+//         ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+//     }
+//     ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+//     ret += "" + secs;
+//     return ret;
+// }
+
+// console.log(format(34322));
