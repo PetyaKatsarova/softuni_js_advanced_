@@ -108,11 +108,70 @@ function createRect(width, height){
     }
     return rect;
 }
-let bla = createRect(10,5);
-console.log(bla.getArea());
-let bla2 = createRect(1,55);
-console.log(bla2.getArea());
-console.log('------------------------------------------------');
-console.log('------------------------------------------------');
-console.log('------------------------------------------------');
-console.log('------------------------------------------------');
+// let bla = createRect(10,5);
+// console.log(bla.getArea());
+// let bla2 = createRect(1,55);
+// console.log(bla2.getArea());
+// console.log('------------------------------------------------');
+// console.log('------------------------------------------------');
+// console.log('------------------------------------------------');
+// console.log('------------------------------------------------');
+
+function sthelse(sss){
+    const result = {};
+   
+    for(let str of sss){
+        let newArr = str.split(" <-> ");
+        newArr[1] = Number(newArr[1]);
+        if(result[newArr[0]]){
+            result[newArr[0]] += newArr[1];
+        }else{
+            result[newArr[0]] = newArr[1];
+        }
+    }
+ //   console.log(result);
+}
+
+sthelse(['ist <-> 1000', 'ist <-> 37', 'sof <-> 7373', 'nie <-> 500']);
+
+const person = {
+    name: 'Ivan',
+    surname: 'Petrov',
+    printName: function (){
+        // console.log(this.name + ' ' + this.surname);
+    }
+}
+person.printName();
+
+// orders is arr of objs with field: template: .... and field: parts[].....
+function factory(library, orders){
+    const result = [];
+    for(let order of orders){
+        const curent = Object.assign({}, order.template);
+        for(let part of order.parts){
+            curent[part] = library[part];
+        }
+        result.push(curent);
+    }
+    console.log(result);
+}
+factory({
+    doA: () => { log: console.log('hi from doA'); },
+    doB: () => { log: console.log('hi from doB'); },
+    doC: () => { log: console.log('hi from doC'); }
+    }, [{ template: { id: 'first' }, parts: [ 'doB' ] },
+        { template: { id: 'second' },  parts: [ 'doA', 'doC' ] },]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

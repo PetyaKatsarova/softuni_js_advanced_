@@ -9,17 +9,17 @@
 // The wheels will be represented by an array of 4 numbers, each number represents the diameter of the wheel in inches. The size can only be an odd number. Round down any requirements you receive to the nearest odd number. 
 function carFactory(car){
     const model = car.model;
-    newCar = {
+    let newCar = {
         model: model,
         engine: {}, 
         carriage: {},
         wheels: []
     }
-    if((car.power <= 90) && (car.power < 120)){
+    if(car.power <= 90){
             newCar.engine = {power: 90, volume: 1800}
-    }else if((car.power <= 120) && (car.power < 200)){
+    }else if(car.power <= 120){
             newCar.engine = { power: 120, volume: 2400 }
-    }else{
+    }else if(car.engine <= 200){
             newCar.enging = { power: 200, volume: 3500 }   
     }
     let wheel = car.wheelsize;
@@ -32,6 +32,7 @@ function carFactory(car){
     let color = car.color;
     newCar.carriage = {type: carriage, color: color};
     console.log(newCar);
+    return newCar;
 }
 
 carFactory({ model: 'VW Golf II',
@@ -51,11 +52,13 @@ power: 110,
 color: 'grey',
 carriage: 'coupe',
 wheelsize: 17 });
+
 // { model: 'Opel Vectra',
 //   engine: { power: 120,
 //             volume: 2400 },
 //   carriage: { type: 'coupe',
 //               color: 'grey' },
 //   wheels: [17, 17, 17, 17] }
+
 
 
