@@ -9,7 +9,15 @@ function storeCatalog(arr){
         }
         obj[nameInitial][name] = price;
     }
-   
+
+    let sortedLetters = Object.keys(obj).sort((a,b)=>a.localeCompare(b));
+
+    for(const letter of sortedLetters){
+        let sortedPr = Object.entries(obj[letter]).sort((a,b)=>a[0].localeCompare(b[0]));
+        console.log(letter);
+        let productsAsString = sortedPr.map(el => `  ${el[0]}: ${el[1]}`).join('\n');
+        console.log(productsAsString);
+    }
 }
 
 storeCatalog(['Appricot : 20.4',
