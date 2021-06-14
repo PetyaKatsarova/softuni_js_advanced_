@@ -1,8 +1,21 @@
-// You will receive an array of strings. For each string, create a div with a paragraph with the string in it. Each
-// paragraph is initially hidden (display:none). Add a click event listener to each div that displays the hidden
-// paragraph. Finally, you should append all divs to the element with an id &quot;content&quot;.
-
-function create(arr) {
-   let content = document.getElementById('content');
+function create(words) {
+   function create(words) {
+      const content = document.getElementById('content');
    
+      for(let word of words){
+         let div = document.createElement('div');
+         let p = document.createElement('p');
+         p.textContent = word;
+         p.style.display = 'none';
+   
+        div.appendChild(p);
+         content.appendChild(div);
+      }
+   
+      content.addEventListener('click', (e)=>{
+          if(e.target.tagName === 'DIV'){
+              e.target.children[0].style.display = 'block';
+          }
+      });
+   }
 }
