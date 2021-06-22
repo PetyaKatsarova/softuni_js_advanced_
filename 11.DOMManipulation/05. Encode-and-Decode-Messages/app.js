@@ -10,30 +10,63 @@
 //  Replace the encoded message with the already decoded message in the receiver textrea, to make it
 // readable
 
-function encodeAndDecodeMessages() {
-    const btns = document.querySelectorAll('button');
-    let encodedMsg = '';
-    let decodedMsg = '';
-    let textareas = document.querySelectorAll('textarea');
+function encodeAndDecodeMessages(){
+    let textareas = document.querySelectorAll('#main textarea');
+    let btns = document.querySelectorAll('#main button');
 
-    //encode and send m
-    btns[0].addEventListener('click', (e)=>{
-        encodeText = textareas[0].value;
-        for(let i=0; i<encodeText.length; i++){
-            let temp = String.fromCharCode(encodeText[i].charCodeAt(0)+1);
-            encodedMsg += temp;
+    btns[0].addEventListener('click',()=>{
+        let msg = textareas[0].value;
+        let encoded = '';
+
+
+        for(let i=0; i<msg.length; i++){
+            encoded += String.fromCharCode(msg[i].charCodeAt(0)+1);
         }
+
         textareas[0].value = '';
-        textareas[1].value = encodedMsg;
+        textareas[1].value = encoded;
     });
 
-    btns[1].addEventListener('click', (e)=>{
-        let decode = textareas[1].value;
-       
-        for(let i=0; i<decode.length; i++){
-            let temp = String.fromCharCode(decode[i].charCodeAt(0)-1);
-            decodedMsg += temp;
+    btns[1].addEventListener('click', ()=>{
+        let msg = textareas[1].value;
+        let decoded = '';
+
+
+        for(let i=0; i<msg.length; i++){
+            decoded += String.fromCharCode(msg[i].charCodeAt(0)-1);
         }
-        textareas[1].value = decodedMsg;
+
+        textareas[1].value = decoded;
     });
 }
+ 
+
+
+// judge doesnt like it
+// function encodeAndDecodeMessages() {
+//     const btns = document.querySelectorAll('button');
+//     let encodedMsg = '';
+//     let decodedMsg = '';
+//     let textareas = document.querySelectorAll('textarea');
+
+//     //encode and send m
+//     btns[0].addEventListener('click', (e)=>{
+//         encodeText = textareas[0].value;
+//         for(let i=0; i<encodeText.length; i++){
+//             let temp = String.fromCharCode(encodeText[i].charCodeAt(0)+1);
+//             encodedMsg += temp;
+//         }
+//         textareas[0].value = '';
+//         textareas[1].value = encodedMsg;
+//     });
+
+//     btns[1].addEventListener('click', (e)=>{
+//         let decode = textareas[1].value;
+       
+//         for(let i=0; i<decode.length; i++){
+//             let temp = String.fromCharCode(decode[i].charCodeAt(0)-1);
+//             decodedMsg += temp;
+//         }
+//         textareas[1].value = decodedMsg;
+//     });
+// }

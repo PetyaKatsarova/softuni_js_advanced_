@@ -1,38 +1,40 @@
 // In this problem, you should create a JS functonality which shows and hides the additional
 // information about users.
-
+//works but didnt pass the judge tests
 function lockedProfile() {
-    let profile = Array.from(document.querySelectorAll('.profile'));
+    let btns = Array.from(document.querySelectorAll('.profile button'));
     
-    profile.forEach(element => {
-        element.addEventListener('click', (e)=>{
-            let radio = element.querySelectorAll('input[type="radio"]'); 
+    btns.forEach(el => {
+        el.addEventListener('click', (e)=>{
+            let profile = e.target.parentElement;
+            let radio = profile.querySelector(`input:checked`);
+            let hidden = e.target.previousElementSibling;
 
-            // for(let i=0; i<radio.length; i++){
-            //     if(radio[i].checked && radio[i].value === 'lock'){
-            //         e.target.setAttribute('disabled', true);
-            //         e.target.style.background = "orange";
-            //     }else{
-            //         e.target.removeAttribute('disabled');e.target.style.background = "blue";
+            if(radio.value === 'unlock'){
+                hidden.style.display = hidden.style.display === 'block' ? 'none' : 'block';
 
-            //     }
-            // }   
-            
-            if(e.target.tagName === 'BUTTON'){
-                if(e.target.textContent === 'Show more'){
-                    e.target.previousElementSibling.style.display = "block";
-                    e.target.textContent = 'Show less';
-                }else{
-                    e.target.previousElementSibling.style.display = "none";
-                    e.target.textContent = 'Show more';
-                }
-               
-                // if(document.querySelector('input[type="radio"]').value === 'unlock'){
-                //     console.log('THANKS G!')
-                // }
-              
-            }
+                e.target.textContent = e.target.textContent === 'Show more' ? 'Hide it' : 'Show more';
+            } 
         });
-    });
-    
+    });  
 }
+
+// new solution for judge
+// function lockedProfile() {
+//     let btns = Array.from(document.querySelectorAll('.profile button'));
+    
+//     for(let i=0; i<btns.length; i++){
+//         btns[i].addEventListener('click', (e)=>{
+//             let radioBtnName = `user${i+1}Locked`;
+//             let radioBtn = document.querySelector(`input[name=${radioBtnName}]:checked`);
+//             let hiddenDiv = document.getElementsById(`user${i+1}HiddenField`);
+
+//             if(radioBtn.value === 'unlock'){
+//                 hiddenDiv.style.display = hiddenDiv.style.display === 'block' ? 'none' : 'block';
+
+//                 e.target.textContent = e.target.textContent === 'Show more' ? 'Hide it' : 'Show more';
+//             } 
+//         });
+//     }
+// }
+
