@@ -1,15 +1,7 @@
-
-
-Petya Katsarova <pskpetya@gmail.com>
-To:
-Petya Katsarova
-
-Mon, 14 June at 1:15 pm
-
 <html>
     <head>
         <title>Office Blinds</title>
-        <link href="resources/blinds.css" type="text/css" rel="stylesheet" />
+        <link href="resources/blindsRenamed.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
         <?php 
@@ -49,15 +41,22 @@ Mon, 14 June at 1:15 pm
                 <defs>
                 <?php
                  foreach($blind_positions as $id=>$vals) {
+                    //  convert percentage from rot values into deg for the blinds rotation patterns and pointer where 0 and 180deg are fully closed blades
+                   $rotDeg = $blind_positions[$id]['rot'] * 1.8 - 90;
                 ?>
                     <pattern id="slots_<?php echo $id; ?>" width=".5" height="0.5" patternUnits="userSpaceOnUse" >
                         <circle cx="0.25" cy="0.25" r="0.25" fill="transparent" style="stroke:none"/>
                         <!-- width bellow was 0.05 -->
-                        <rect x="0.225"    width="0.1" height="100%" fill="beige" style="stroke:none;<?php
-                        // $id is it an array?
-                      
-                            // default for vertical blinds is 90deg: u add on top the rot angle u want
-                            echo "transform:rotate(".((in_array($id,Array("5","6","7")) ? 90 : 0) + $blind_positions[$id]['rot'])."deg);";   
+                        <rect x="0.225"    width="0.1" height="100%" fill="white" style="stroke:none;<?php
+                         // default for vertical blinds is 90deg: u add on top the rot angle u want
+                            echo "transform:rotate(".((in_array($id,Array("5","6","7")) ? 90 : 0) + $rotDeg)."deg);";
+                            // changed deg to %
+                          //  ['rot'])."deg);";   
+
+
+                          //  echo "transform:rotate(".((in_array($id,Array("5","6","7")) ? 90 : 0) + $blind_positions[$id]
+                            // changed deg to %
+                          //  ['rot'])."deg);";   
                             echo "transform-origin: .25px .25px;";
                         
                         ?>" />
@@ -108,6 +107,41 @@ Mon, 14 June at 1:15 pm
                 </g>
                 
             </svg>
+
+<style>
+#wrapperRotation{
+    width: 40%;
+    margin: 0 auto;
+    border: 2px dotted beige;
+    border-radius: 50%;
+    display: flex;
+}
+#pointer{
+    border: 3px solid blue;
+    background-color: blue;
+    text-align: center;
+    border-radius: 2rem;
+    margin-top: 40%;
+    width: 50%;
+    height: 10%;
+    position: relative;
+    transform-origin: 95% 50%;
+} 
+
+#filler{
+    left: 95%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    display: block;
+    background: blue;
+    position: absolute;
+    border-radius: 50%;
+} 
+
+</style>
+
+
             <form id="formWindows" method="post">
                 <label>Select a window: </label>
                 <div class="checkboxesWrapper">
@@ -119,8 +153,55 @@ Mon, 14 June at 1:15 pm
                         </div>
                         <label for="lin">Linear Position: </label>
                         <input type="range" name="lin" min="1" max="100" value="30" class="slider" id="lin" />
-                        <label for="rot">AngleRotation: </label>
-                        <input type="range" name="rot" min="1" max="100" value="60" class="slider" id="rot" />
+                        <label for="rot">Angle Rotation: </label>
+                        <!-- <input type="range" name="rot" min="1" max="100" value="60" class="slider" id="rot" /> -->
+
+                        <div id="wrapperRotation">
+                            <div id="pointer">
+                                <div id="filler">
+                                    <input type="hidden" name="rot" id="rot" value="50" />
+                                </div>
+                            </div>
+                        </div>
+
+                <script>
+                    // adding the rotation pointer and values for it
+                    let rect = document.getElementById("filler").getBoundingClientRect(); 
+                    let hiddenInputRot = document.getElementById('rot');
+
+                    function onMMove(e){
+                        let y = e.pageY - rect.y;
+                        let x = e.pageX - rect.x;
+                        // calc angle degs: 
+                        let inDegrees = (Math.atan(y/x)*180/Math.PI);
+
+                        if (x>0) {
+                            inDegrees+=180;
+                        }
+                        inDegrees = inDegrees < 0 ? inDegrees = 0 : inDegrees;
+                        inDegrees = inDegrees > 180 ? inDegrees = 180 : inDegrees;
+                       // console.log(x,y,inDegrees);
+                        let inPerc = inDegrees/1.80; 
+                        hiddenInputRot.value = inPerc;
+                        // 100 perc = 180deg
+                        //50pers = 90deg
+                        document.getElementById('pointer').style.transform = `rotate(${inDegrees}deg)`;
+                        
+                    }
+
+                    function addMousemove(e){ 
+                        // has to always be on body, otherwise gives a bug
+                        document.body.addEventListener('mousemove',onMMove);
+                    }
+
+                    document.getElementById('pointer').addEventListener('mousedown', addMousemove);
+                    // same: if i use the wrapper instead of body gives a bug
+                    document.body.addEventListener('mouseup', (e)=>{       
+                        document.body.removeEventListener('mousemove', onMMove);
+                    });
+
+                </script>
+
                         <label> Select All: </label>
                         <input type="checkbox" name="windows_all" />
                         <input type="submit" name="moveBlinds"/>
@@ -164,7 +245,3 @@ Mon, 14 June at 1:15 pm
         <?php var_dump($_POST); ?>
     </body>
 </html>
-
-
-
-
