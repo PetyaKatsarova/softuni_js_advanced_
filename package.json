@@ -6,7 +6,9 @@
   "name": "13.advanced_functions",
   "version": "1.0.0",
   "main": "proba.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "2.3.2"
+  },
   "scripts": {
     "test": "mocha"
   },

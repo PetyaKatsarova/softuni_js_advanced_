@@ -5,6 +5,37 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+
+        {
+            "name": "Launch Program",
+            "program": "${file}",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "Attach",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "args": [
                 // if u want to test delete -u and tdd
                  "-u",
@@ -12,8 +43,9 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/exam_preparation_1/zadacha_3/test"
-                // "${workspaceFolder}/test"
+                // "${workspaceFolder}/exam_preparation_1/zadacha_3/test"
+               // "${workspaceFolder}/test"
+               "${file}"
                
             ],
             "internalConsoleOptions": "openOnSessionStart",
@@ -36,14 +68,14 @@
                 // "${workspaceFolder}/test"
                 "${file}"
             ],
-            "internalConsoleOptions": "openOnSessionStart",
-            "name": "Mocha Tests",
-            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "pwa-node"
+            // "internalConsoleOptions": "openOnSessionStart",
+            // "name": "Mocha Tests",
+            // "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            // "request": "launch",
+            // "skipFiles": [
+            //     "<node_internals>/**"
+            // ],
+            // "type": "pwa-node"
         },
 
         {

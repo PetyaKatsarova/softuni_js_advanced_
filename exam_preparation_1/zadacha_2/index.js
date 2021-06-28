@@ -44,6 +44,10 @@ class Parking{
     }
 
     getFullStatistics(){
+        let result = [];
+        result.push(`The Parking Lot has ${this.capacity - this.vehicles.length} empty spots left.`);
+        let sortedVehicles = this.vehicles.slice().sort((a,b) => a.carModel - b.carModel)
+                             .forEach(car => result.push(car))
 
     }
     carReport(car){
