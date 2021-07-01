@@ -8,22 +8,23 @@
 //      Store the result in an array and output it as a JSON string display it inside the &lt;textarea&gt; with id
  //   “output”. See the example for details.
 
+
 function generateReport() {
-    let inputs = document.querySelectorAll('th input');
-    let info = document.querySelectorAll('tbody tr');
+    let inputs = Array.from(document.querySelectorAll('th input'));
+    let info = Array.from(document.querySelectorAll('tbody tr'));
     let result = [];
 
-    for(let i=0; i<info.length; i++){
-        let td = info[i].querySelectorAll('td');
-        for(let j=0; j<td.length; j++){
-            if(inputs[j].checked){
-               let obj = {}
-               obj[inputs[j].name] = td[j].textContent;
-               result.push(obj);
+    for (let i = 0; i < info.length; i++) {
+        let obj = {}
+        let td = Array.from(info[i].children);
+        for (let j = 0; j < td.length; j++) {
+            if (inputs[j].checked) {
+                obj[inputs[j].name] = td[j].textContent;
             }
         }
-        // console.log('-----------------------------------------');
+        result.push(obj);
     }
-    document.getElementById('output').value = JSON.stringify(result);
-    // console.log(JSON.stringify(result));
+    // ********************** stringify(arr, null, 2) makes it prettier: *************************
+
+    document.getElementById('output').value = JSON.stringify(result,null,2);
 }
