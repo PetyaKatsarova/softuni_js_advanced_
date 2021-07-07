@@ -5,7 +5,7 @@
 //  Return true if the input array is symmetric
 //  Otherwise, return false
 
-const isSymmetric = require('../symmetry.js');
+const isSymmetric = require('../5.symmetry.js');
 const { assert, expect } = require('chai');
 //but dont use should: goes into ur result
 const should = require('chai').should();

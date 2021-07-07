@@ -1,41 +1,10 @@
-// Write a function that displays information about the arguments which are passed to it (type and value) and a
-// summary about the number of each type in the following format:
+// Write a function that displays information about the arguments which are passed to it (type and value) and a summary about the number of each type in the following format:
 // "{argument type}: {argument value}"
 // Print each argument description on a new line. At the end print a tally with counts for each type in descending order, each on a new line in the following format: "{type} = {count}"
 // If two types have the same count, use order of appearance.
 // Do NOT print anything for types that do not appear in the list of arguments.
-// Input
-// You will receive a series of arguments passed to your function.
-// Output
-// Print on the console the type and value of each argument passed into your function.
-//50%
-function solve(){
-   // console.log(arguments);
-   let str=func=obj=num=0;
-    for(let row of arguments){
-        console.log(`${typeof(row)}: ${row}`);
-        if((typeof(row)) === 'string'){
-            str += 1;
-        }else if((typeof(row)) === 'number'){
-            num += 1;
-        }else if((typeof(row)) === 'object'){
-            obj += 1;
-        }else if((typeof(row)) === 'function'){
-            func += 1;
-        }
-    }
-    if(str > 0){
-        console.log(`string = ${str}`);
-    }
-    if(num > 0){
-        console.log(`number = ${num}`);
-    }if(func > 0){
-        console.log(`function = ${func}`);
-    }if(obj > 0){
-        console.log(`object = ${obj}`);
-    }
-    
-}
+// Input // You will receive a series of arguments passed to your function.
+// Output// Print on the console the type and value of each argument passed into your function.
 
 function solve2(...params){
     let obj = {}

@@ -16,8 +16,18 @@ function getFibonator(){
 
 }
 
+function foo() {
+    let nums = [0, 0]
 
-let fib = getFibonator();
+    return () => {
+        const result = nums[0] + nums[1]
+        nums = [nums[1], nums[1] + nums[0] || 1]
+        return result || 1
+    }
+}
+
+
+let fib = foo();
 console.log(fib()); // 1
 console.log(fib()); // 1
 console.log(fib()); // 2

@@ -7,7 +7,7 @@
 
 
 const assert = require('chai').assert;
-const isSymmetric = require('../check_for_symetry/check_symetry.js');
+const isSymmetric = require('../15.test_units/check_for_symetry/check_symetry.js');
 
 describe('Test some functionality', ()=>{
     // 'it' is for a function

@@ -14,7 +14,17 @@ function add(num1){
     // inner.toString = () => sum;
     return inner(num1);
 }
-// toString() does sth
+function foo(n) {
+    let temp = 0
+
+    function recursive(x) {
+        temp += x
+
+        return recursive
+    }
+    recursive.toString = () => temp
+    return recursive(n)
+}
 
 // console.log(add(1));// 1
 // console.log(add(5)(1));// 6
