@@ -8,8 +8,8 @@ class Stringer{
     constructor(str,initLength){
         this.innerString = str;
         this.innerLength = Number(initLength);
-        this.innerString.length = this.innerLength;
     }
+   
     increase(num){
        this.innerLength += Number(num);
     }
@@ -17,13 +17,13 @@ class Stringer{
         this.innerLength - Number(num) < 0 ? this.innerLength = 0 : this.innerLength -= Number(num);
     }
     toString(){
-        if(this.innerString.length > this.innerLength && this.innerLength !== 0){
-            const difference = this.innerString.length - this.innerLength;
-            return this.innerString.slice(-difference) + '...';
-        }else if(this.innerLength === 0){
+        if(this.innerLength === 0){
             return '...';
         }
-        return this.innerString;
+        if(this.innerString.length > this.innerLength){
+            return `${this.innerString.slice(0, this.innerLength)}...`;
+        }
+       return this.innerString;
     }
    
 }
