@@ -2,6 +2,7 @@
   "dependencies": {
     "chai": "^4.3.4",
     "mocha": "^9.0.2",
+    "picnic-api": "^1.4.2",
     "requirejs": "^2.3.6"
   },
   "name": "13.advanced_functions",

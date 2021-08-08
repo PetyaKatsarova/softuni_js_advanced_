@@ -3,22 +3,36 @@
 //  If fullName is changed, then firstName and lastName should also be changed.
 //  If fullName is invalid, you should not change the other properties. A valid full name is in the format "{firstName} {lastName}"
 
-function Person(f,l) {
-    this.firstName = f;
-    this.lastName = l;
+//constructor func is sugar synthax for class
+// function Person(f,l) {
+//     this.firstName = f;
+//     this.lastName = l;
 
-    Object.defineProperty(this, 'fullName',{
-        get: function (){return `${this.firstName} ${this.lastName}`},
-        set: function (fullName) {
-            // if u put g at the end of the regexp: get error
-            let pattern = /(?<fname>\w+) (?<lname>\w+)/;
-            let groups = fullName.match(pattern);
-            if(groups){
-               this.firstName = groups[1];
-               this.lastName = groups[2];
-            }
-        }
-    });
+//     Object.defineProperty(this, 'fullName',{
+//         get: function (){return `${this.firstName} ${this.lastName}`},
+//         set: function (fullName) {
+//             // if u put g at the end of the regexp: get error
+//             let pattern = /(?<fname>\w+) (?<lname>\w+)/;
+//             let groups = fullName.match(pattern);
+//             if(groups){
+//                this.firstName = groups[1];
+//                this.lastName = groups[2];
+//             }
+//         }
+//     });
+// }
+
+class  Person{
+    constructor(f,l){
+       this.firstName = f;
+       this.lastName = l;
+    }
+    get fullName(){
+        return `${this.firstName} ${this.lastName}`;
+    }
+    set fullName(fullName){
+        [this.firstName, this.lastName] = fullName.split(' ');
+    }
 }
 
 let person = new Person("Peter", "Ivanov");

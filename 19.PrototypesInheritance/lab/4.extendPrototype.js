@@ -3,6 +3,10 @@
 // Input / Output
 // Your function will receive a class whose prototype it should extend. There is NO output, your function should only
 // attach the properties to the given class’ prototype.
+//!!!!!!!!!!!!
+// using prototype is like using delegation/reference to the class: saves memory
+// objects inherit props and methods from prototype, not exactly inheriting
+//!!!!!!!!!!!!!!
 function extendProrotype(classToExtend) {
      classToExtend.prototype.species = 'Human';
      classToExtend.prototype.toString = function () {
@@ -21,4 +25,4 @@ class bla{
         this.age = age;
     }
 };
-console.log(extendPrototype(bla));
+console.log(extendPrototype(bla))

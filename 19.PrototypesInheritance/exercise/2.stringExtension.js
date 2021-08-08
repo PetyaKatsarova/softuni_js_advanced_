@@ -8,53 +8,73 @@
 // Input and output of the extension functions should be as described above.
 (function  wrapper() {
     String.prototype.ensureStart = function (str) {
-        if(this.slice(0,str.length) !== str){
-           // return str + this;
-            return `${str}${this}`;
-        }else{
+        if(this.startsWith(str)){
             return this.toString();
         }
+        return `${str}${this}`;
     }
     String.prototype.ensureEnd = function (str) {
-        if(this.slice(-(str.length-1)) !== str){
-            return str + this;
-        }else{
-            return this;
+        if(this.endsWith(str)){
+            return this.toString();
         }
+        return `${this}${str}`;
     }
-   String.prototype.isEmpty = function () {
-       return this.toString() === '';
-   }
-  
-   // If it is longer, split the string where a space occurs and append an ellipsis to it so that the total length is less than or equal to n. If no space occurs anywhere in the string, return n - 3 characters and an ellipsis. If n is less than 4, return n amount of periods.
-   String.prototype.truncate = function (n) {
-        if(this.length < n){
-            return this;
-        }else{
-            // but what if this.length == n ???
-            if(this.split(' ').length > 1){
-                let bla = this.split(' ');
-                let index = Math.max()
-            }
+    String.prototype.isEmpty = function () {
+        return this.toString() === '';
+    }
+    String.prototype.truncate = function (n) {
+        if(this.length <= n){
+            return this.toString();
         }
+       // if str includes space
+        if(this.includes(' ')){
+            let words = this.split(' ');
+            do{
+                words.pop();
+            }while(words.join(' ').length+3 > n)
+            return `${words.join(' ')}...`
+        }
+
+        //str no space but more than 3 chars
+        if(n > 3){
+            return `${this.slice(0, n - 3)}...`;
+        }
+        return '.'.repeat(n);
    }
+   // static func
+    String.format = function(string, ...params){
+        let pattern = /{(\d+)}/g;
+        let replacedStr = string.replace(pattern, (match, group1) => {
+            let i = Number(group1);
+            if(i < params.length){
+                return params[i];
+            }
+            return match;
+        });
+        return replacedStr;
+    }
+
 })()
-
-
 
 let str = 'my string';
 str = str.ensureStart('my');
-str = str.ensureStart('hello ');
+str = str.ensureStart('hello ');// hello my string
+str = str.truncate(16);
 console.log(str);
-// str = str.truncate(16);
-// str = str.truncate(14);
-// str = str.truncate(8);
-// str = str.truncate(4);
-// str = str.truncate(2);
-// str = String.format('The {0} {1} fox',
-// 'quick', 'brown');
-// str = String.format('jumps {0} {1}',
-// 'dog');
+str = str.truncate(14);
+console.log(str);
+str = str.truncate(8);
+console.log(str);
+str = str.truncate(4);
+console.log(str);
+str = str.truncate(2);
+console.log(str);
+str = String.format('The {0} {1} fox',
+'quick', 'brown');
+console.log(str);
+str = String.format('jumps {0} {1}',
+'dog');
+console.log(str);
 
 // 'my string' // 'my' already present
 // 'hello my string'

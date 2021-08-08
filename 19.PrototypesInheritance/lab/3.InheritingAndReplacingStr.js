@@ -4,7 +4,7 @@
 // Input / Output
 // There will be NO input. Your function should return an object containing the classes Person, Teacher and
 // Student.
-function  personAndTeacher(params) {
+(function  personAndTeacher(params) {
     class Person{
         constructor(name, email){
             this.name = name;
@@ -36,6 +36,6 @@ function  personAndTeacher(params) {
     let s = new Student('kiki', 'kuku@bla.com', 'js');
     console.log(s.toString());
     return {Person, Teacher, Student}
-}
+})();
 
-console.log(personAndTeacher());
+//console.log(personAndTeacher());
