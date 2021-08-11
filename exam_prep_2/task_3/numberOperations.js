@@ -31,3 +31,4 @@ const numberOperations = {
         return resultArr
     }
 };
+module.exports = numberOperations;
