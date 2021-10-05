@@ -48,7 +48,6 @@ function solve() {
                 let module = ul.parentElement;
                 let modules = module.parentElement;
                 let h3 = module.querySelector('h3');
-                let h4 = li.querySelector('h4');
 
                 if(ul.children.length == 1){
                     modules.removeChild(module);
@@ -56,7 +55,7 @@ function solve() {
                     console.log(lectures);
                 }else{
                     ul.removeChild(li);
-                    delete lectures[h3.textContent][]
+                    delete lectures[h3.textContent][] //????
                 }
             })
         

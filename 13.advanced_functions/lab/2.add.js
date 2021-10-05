@@ -4,6 +4,8 @@ function solve(n){
       return num + num2;
    }
 }
-let add5 = solution(5);
+let add5 = solve(5);
 console.log(add5(2));//7
 console.log(add5(3));//8
+
+solve.
